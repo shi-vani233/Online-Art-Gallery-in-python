@@ -1,0 +1,93 @@
+<html>
+
+<head>
+    <tittle>
+
+    </tittle>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: sans-serif;
+            background: url('/static/image.jpg');
+            background-size: cover;
+        }
+        
+        .m,
+        .n,
+        .p {
+            border: none;
+            outline: none;
+            background: none;
+            color: white;
+            font-size: 20px;
+            width: 70%;
+            margin-inline: 1px;
+        }
+        
+        .dtn {
+            width: 10%;
+            background: none;
+            color: white;
+            padding: 10px;
+            font-size: 15px;
+            cursor: pointer;
+            margin: 12px 0;
+        }
+        
+        .mtn {
+            padding: 15px 25px;
+            font-size: 25px;
+            text-align: center;
+            cursor: pointer;
+            outline: none;
+            color: #fff;
+            background-color: darkslategrey;
+            border: none;
+            border-radius: 15px;
+            padding: 10px;
+        }
+        
+        .l {
+            text-align: center;
+            font-size: 30px;
+            text-shadow: 1px 1px 2px #000000;
+            margin-bottom: 1px;
+            padding: 5px 0;
+            color: darkred;
+            text-align: center;
+        }
+    </style>
+</head>
+<br><br><br><br><br><br>
+
+<body>
+    <center>
+        <DIV class=l>
+            {% if msg %} {{msg}} {% endif %}
+        </DIV>
+        <br> {% for art in arts %}
+        <img src="{{art.image.url}}" width="300" height="300" /> {%if art.available %}
+        <p class="m"> ART NAME :&nbsp{{art.artname}}</p>
+        <p class="n">CATEGORY :&nbsp{{art.category}}</p>
+        <p class="p">PRIZE :&nbsp{{art.prize}} ₹ </p>
+        <form action="/Add_Art/delete_art/" class="delete" method="POST">
+            {% csrf_token %}
+            <input type="hidden" name="img" value="{{art.artname}}">
+            <INPUT class="dtn" type="submit" value="delete">
+        </form>
+        {%else%}
+        <p class="m"> THIS ART IS SOLD TO </p><br>
+        <p class="p">{{art.username}} IN {{art.prize}} ₹ </p>
+        {% endif %}
+        <br><br> {% endfor %}
+    </center>
+
+    <center>
+        <form action="/Add_Art/addart/">
+            <INPUT class="mtn" type="submit" value=" GO BACK TO HOME">
+        </form>
+    </center>
+</body>
+
+</html>

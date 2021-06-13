@@ -1,0 +1,240 @@
+<html>
+<head>
+	<title>
+			Home Page
+	</title>
+	<style>
+    body, html {
+      height: 100%;
+      margin: 0;
+    background-color:#FFDBAC;
+     background-size: cover;
+    }
+    .bg .u{
+      bottom: 500px;
+      background: rgb(0, 0, 0); 
+      background: rgba(0, 0, 0, 0.5); 
+      color: #f1f1f1;
+      width: 100%;
+      padding: 30px;
+        font-size:30px;	
+    text-shadow: 2px 2px 4px #000000;
+    }
+    .head{
+      background-position: center;
+      background-color: #C18566;
+      
+       background-size: cover;
+             width: 50%;
+        height: 6%; 
+      text-align: center;
+           margin-left: auto;
+        margin-right: auto;
+     border-radius: 25px;
+      
+    }
+    .head  h1{
+      color:white;
+      text-shadow: 2px 2px 4px #000000;
+      font-size:35px;	
+    }
+    .bg{
+      height: 40%; 
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: cover;
+      background-image: url('/static/bg.jpg');
+    }
+    
+    .navbar {
+      bottom:0;
+      overflow: hidden;
+      background-color: #2D332A;
+    }
+    
+    .navbar a {
+      float: right;
+      font-size: 20px;
+      color: white;
+      text-align: center;
+      padding: 14px 16px;
+      text-decoration: none;
+    text-shadow: 2px 2px 4px #000000;
+      
+    }
+    
+    .dropdown {
+      float: right;
+      overflow: hidden;
+    }
+    
+    .dropdown .dropbtn {
+      font-size: 20px;  
+      border: none;
+      outline: none;
+      color: white;
+      padding: 14px 16px;
+      background-color: inherit;
+      font-family: inherit;
+    text-shadow: 2px 2px 4px #000000;
+      margin: 0;
+    }
+    
+    .navbar a:hover, .dropdown:hover .dropbtn {
+      background-color: red;
+    }
+    
+    .dropdown-content {
+      display: none;
+      position: absolute;
+      background-color: #f9f9f9;
+      min-width: 160px;
+      box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+      z-index: 1;
+    }
+    
+    .dropdown-content a {
+      float: none;
+      color: black;
+      padding: 12px 16px;
+      text-decoration: none;
+      display: block;
+      text-align: left;
+    }
+    
+    .dropdown-content a:hover {
+      background-color: #ddd;
+    }
+    
+    .dropdown:hover .dropdown-content {
+      display: block;
+    }
+    h1 {
+      font-size: 50px;
+      word-break: break-all;
+    }
+    
+    .dtn , .ctn {
+      padding: 15px 25px;
+      font-size: 20px;
+      text-align: center;
+      cursor: pointer;
+      outline: none;
+      color: #fff;
+      background-color:black;
+      border: none;
+      border-radius: 15px;
+      padding: 10px;
+      
+    }
+    .mtn {
+      padding: 15px 25px;
+      font-size: 25px;
+      text-align: center;
+      cursor: pointer;
+      outline: none;
+      color: #fff;
+      background-color: darkslategrey;
+      border: none;
+      border-radius: 15px;
+      padding: 10px;
+    
+      
+    }
+      .m,.n,.p{
+      border: none;
+      outline: none;
+      background: none;
+      color: black;
+      font-size: 20px;
+      width: 70%;
+       margin-inline: 1px;
+         font-family: inherit;
+    }
+    
+    .k{
+      text-align: center;
+      font-size: 30px;
+      text-shadow: 1px 1px 2px #000000;
+      margin-bottom: 1px;
+      padding: 13px 0;
+      color: red;
+      text-align:center;
+    }
+    .l{
+      text-align: center;
+      font-size: 30px;
+      text-shadow: 1px 1px 2px #000000;
+      margin-bottom: 1px;
+      padding: 5px 0;
+      color: darkred;
+      text-align:center;
+    }
+    </style>
+    
+</head>
+<body>
+<div class="bg">
+  <div class="u"><center><h1>welcome to Art Gallery</h1></center></div>
+  </div>
+  <div class="navbar">
+    <a href="/Login_App/logout/">Logout</a> 
+    <a href="/Home/cart_view/">Your Cart</a>
+    <a href="/Home/purchases_view/">Your Purchases</a>
+    <a href="/Home/profile/">Your Profile</a>
+    <div class="dropdown">
+      <button class="dropbtn">Search By Category 
+        <i class="fa fa-caret-down"></i>
+         </button>
+      <div class="dropdown-content">
+        <a href="/Home/search?category=Oil Pastel " method="GET">Oil Pastel</a>	
+         <a href="/Home/search?category=Watercolor Painting" method="GET">Watercolor Paiting</a>
+         <a href="/Home/search?category=Graffiti" method="GET">Graffiti</a>
+         <a href="/Home/search?category=Acrylic Painting" method="GET">Acrylic Painting</a>	
+         <a href="/Home/search?category=Ink Wash Painting" method="GET">Ink Wash Painting</a>
+         <a href="/Home/search?category=Sketch" method="GET">Sketch</a>
+         <a href="/Home/search?category=Other" method="GET">Other</a>
+      </div>
+       
+    </div>
+    </form>
+  </div>
+      <br>
+          <br>
+          <center>
+          <DIV class=l>
+            {% if msg %}
+              {{msg}}
+            {% endif %}
+            </DIV>
+  <div class="head">
+      
+    <h1>Featured Arts</h1>
+  </div>
+      <br>
+    {% for art in arts %}
+      {%if art.available %}
+        <img src="{{art.image.url}}" width="300" height="300"/>
+       <p class="m">ART NAME :&nbsp{{art.artname}}</p>
+          <p class="n">CATEGORY :&nbsp{{art.category}}</</p>
+          <p class="p">PRIZE :&nbsp{{art.prize}} ₹ </p>
+          <form action="/Home/new_purchase/" class="PURCHASE" method="POST">
+            {% csrf_token %}
+            <input type="hidden" name="img" value="{{art.artname}}">
+        <INPUT class="dtn" type="submit" value="PURCHASE">
+        </form>
+        <br>
+        <form action="/Home/cart/" class="ADD TO CART+" method="POST">
+            {% csrf_token %}
+          <input type="hidden" name="img" value="{{art.artname}}">
+        <INPUT class="ctn" type="submit" value="ADD TO CART+">
+        <br>
+        <br>
+        <br>
+        <br>
+      </form>
+      {% endif %}
+    {% endfor %}        
+  </center> 
+</body>
+</html>
